@@ -563,10 +563,12 @@ class Sistema{
     }
 }
 
-/* pra dar o commit no github
-
+/*  personal note - dar o commit no github
     git status (ver se aparece main)
-    
+    git add .
+    git commit -m "mensagem do commit"
+    git push
+    git status(de novo só pra ver se a branch tá up to date com 'origin/main')
  */
 
 const sistema = new Sistema();

@@ -277,7 +277,18 @@ class Sistema{
     }
 
     verMinhasMultas(){
-        // como filtrar as multas para um usuário só (perguntar isso)
+        console.log("SUAS MULTAS")
+
+        var multasDoCondutor = this.multas.filter((multadada)=> multadada.ID_condutor === this.usuariologado.ID_condutor
+    )
+        if(multasDoCondutor.lenght === 0){
+            console.log("Você não possui multas.")
+        }
+
+        multasDoCondutor.forEach((multadada)=> {
+            console.log(`ID: ${multadada.ID_multa} | Tipo: ${multadada.tipo_infração} | Status: ${multadada.status_multa}`)
+        })
+    }
     }
 
     cadastrarVeiculo(){
@@ -291,11 +302,95 @@ class Sistema{
     } // this.veiculos = []
 
     pagarMulta(){
+         console.log("Área de pagamento de multa") 
+        var multasDoCondutor = this.multas.filter((multadada)=> multadada.ID_condutor === this.usuariologado.ID_condutor
+        );
 
+        // ver se o usuário sequer tem uma multa
+
+        if(multasDoCondutor.lenght === 0){
+            console.log("Você não possui multas a serem pagas")
+        }
+
+        multasDoCondutor.forEach((multadada)=> {
+            console.log(`ID: ${multadada.ID_multa} | Tipo: ${multadada.tipo_infração}`)
+        })
+
+        var ident_multa = id_texto
+
+        var id_texto = requisicao.question("Digite o ID da multa que deseja pagar:")
+
+        var multa = this.multas.find((multaitem) => multaitem.ID_multa === ident_multa && multaitem.ID_condutor === this.usuariologado.ID_condutor);
+// encontrando a multa desejada
+
+        if(!multa){
+            console.log("Multa não encontrada ou não pertencente ao condutor")
+            return;
+        }
+
+        if(multa.status_multa=== "paga"){
+            console.log("Esta multa já está paga")
+            return;
+        }
+
+        // agora, mudar o status da multa
+
+        var opcao = requisicao.question("Digite [1] para pagar a multa: ")
+
+        if(opcao ==="1"){
+            console.log("O status da multa mudou para: PAGA")
+            multa.status_multa = "paga"
+        }
+
+        else{
+            console.log("você optou por não pagar a multa")
+        }
+
+    }
     }
 
     recorrerMulta(){
+             console.log("Recorra aqui")
+        var multasDoCondutor = this.multas.filter((multadada)=> multadada.ID_condutor === this.usuariologado.ID_condutor)
 
+
+        if(multasDoCondutor.length === 0){
+            console.log("Você não tem multas a recorrer")
+        }
+        multasDoCondutor.forEach((multadada)=> {
+            console.log(`ID: ${multadada.ID_multa} | Tipo: ${multadada.tipo_infração}`)
+        })
+
+        // filtro por ID
+
+        var id_texto = requisicao.question("Digite o ID da multa que deseja :")
+
+        var multa = this.multas.find((multaitem) => multaitem.ID_multa === ident_multa && multaitem.ID_condutor === this.usuariologado.ID_condutor);
+
+
+        if(!multa){
+            console.log("Multa não encontrada ou não pertencente ao condutor")
+        }
+
+        if(multa.status_multa=== "paga"){
+            console.log("Esta multa já está paga")
+            this.sairDoSisitema()
+        }
+
+        var opcao = requisicao.question("Digite [1] para recorrer a multa: ")
+
+        // mudando o status da multa
+
+        if(opcao ==="1"){
+            console.log("O status da multa mudou para: RECORRIDA")
+            multa.status_multa = "recorrida"
+        }
+
+        else{
+            console.log("você optou por não recorrer à multa")
+        }
+
+    }
     }
 
     sairDoSisitema(){
@@ -349,10 +444,40 @@ class Sistema{
     }
 
     alterarStatusDaMulta(){
-        //perguntar como faz esse
+          console.log("Página de alteração de status de multa")
+        var ident_multa= requisicao.question("Digite o ID da multa:")
+        var multa = this.multas.find((multadada)=> multadada.ID_multa === ident_multa)
+
+        if(!multa){
+            console.log("multa não encontrada")
+            return;
+        }
+
+        var opcao = requisicao.question("Digite a tecla correspondente para o novo status desejado da multa: \n [1]-pendente \n [2]-paga \n [3]-recorrida")
+
+        if(opcao==="1"){
+            console.log("O status da multa agora é PENDENTE")
+            multa.status_multa = "pendente"
+        }
+
+        else if(opcao==="2"){
+            console.log("O status da multa agora é PAGA")
+            multa.status_multa ="paga"
+        }
+
+        else if(opcao==="3"){
+            console.log("O status da multa agora é RECORRIDA")
+            multa.status_multa = "recorrida"
+        }
+
+        else{
+            console.log("Opção inválida")
+        }
+    }
     }
 
 }
 const sistema = new Sistema();
 sistema.fazerLogin();
+
 

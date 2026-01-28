@@ -388,12 +388,13 @@ class Sistema{
         this.veiculos.push(new Veiculo(placa,modelo,marca,cor))
 
         // fazer verificação dos dados aqui também
+        
 
         var placaValida = true
         for( var i =0; i< placa.length; i++){
             if( typeof placa[i]!== "string"){
                 placaValida = false
-                console.log("Placa inválida")
+                console.log("Placa inválida. Use apenas letras")
                 this.sairDoSisitema()
             }
         }
@@ -402,7 +403,7 @@ class Sistema{
         for(var i=0; i<modelo.length;i++){
             if(typeof modelo[i]!== "string"){
                 modeloValido=false
-                console.log("Modelo inválido")
+                console.log("Modelo inválido. Use apenas letras")
                 this.sairDoSisitema()
             }
         }
@@ -411,7 +412,7 @@ class Sistema{
         for(var i =0;  i<marca.length;i++){
             if(typeof marca[i]!== "string"){
                 marcaValida=false
-                console.log("marca inválida")
+                console.log("marca inválida, Use apenas letras")
                 this.sairDoSisitema()
             }
         }
@@ -420,7 +421,7 @@ class Sistema{
         for(var i =0 ; i<cor.length;i++){
             if(typeof cor[i]!== "string"){
                 corValida= false
-                console.log("cor inválida")
+                console.log("cor inválida, use apenas letras")
                 this.sairDoSisitema()
             }
         }

@@ -116,22 +116,29 @@ class Sistema{
         this.condutores.push(condutor)
         Condutor.isCadastrado= true;
 
-        if(typeof nome_condutor!=="string" && nome_condutor.trim().lenght >0){
+        if(typeof nome_condutor!=="string" && nome_condutor.lenght===0){
             console.log("Nome inválido. O nome deve ser composto por caracteres e não pode ser vazio")
             return
         }
 
-        if(cpf_condutor.length!==11){
-            console.log("CPF inválido. O CPF deve conter 11 dígitos")
-            return
+       var cpfValido = true;
+        for(var i =0;i<cpf_condutor.length;i++){
+            if(typeof (cpf_condutor[i]) !== "string"){
+                cpfValido=false
+                console.log("CPF inválido")
+                this.sairDoSisitema()
+            }
         }
 
-        if(data_de_nascimento_condutor.length!==8){
-            console.log("A data de nascimento deve conter 8 numero [DD//MM//AAAA]")
-            return
+        var dataDeNascimentoValida= true
+        for(var i =0; i<data_de_nascimento_condutor.length;i++){
+            if(typeof (data_de_nascimento_condutor[i])!== "string")
+                dataDeNascimentoValida = false
+                console.log("data de nascimento inválida")
+                this.sairDoSisitema()
         }
 
-        if(!email_condutor_cadastro.includes("@")){
+        if(!email_condutor_cadastro.includes("@") && typeof email_condutor_cadastro!=="string"){
             console.log(`Email inválido. Emails devem conter o caracter @`)
             return
         }
@@ -166,14 +173,21 @@ class Sistema{
             return
         }
 
-        if(cpf_agente.length!==11){
-            console.log("CPF inválido. O CPF deve conter 11 dígitos")
-            return
+        var cpfValido = true;
+        for(var i =0;i<cpf_agente.length;i++){
+            if(typeof (cpf_agente[i]) !== "string"){
+                cpfValido=false
+                console.log("CPF inválido")
+                this.sairDoSisitema()
+            }
         }
 
-        if(data_de_nascimento_agente.length!==8){
-            console.log("A data de nascimento deve conter 8 numero [DD//MM//AAAA]")
-            return
+        var dataDeNascimentoValida= true
+        for(var i =0; i<data_de_nascimento_agente.length;i++){
+            if(typeof (data_de_nascimento_agente[i])!== "string")
+                dataDeNascimentoValida = false
+                console.log("data de nascimento inválida")
+                this.sairDoSisitema()
         }
 
         if(!email_condutor_cadastro.includes("@")){
@@ -181,7 +195,14 @@ class Sistema{
             return
         }
 
-        // falta verificar se tudo isso é número ou não (menos o nome)
+        var numeroDeMatriculaValido = true
+        for(var i =0;i<numeroDeMatriculaValido.lenght;i++ ){
+            if(typeof(num_de_matricula[i]!== "string")){
+                numeroDeMatriculaValido = false
+                console.log('número de matrícula inválido')
+                this.sairDoSisitema()
+            }
+        }
 
         
 // pronto, aqui peguei os dados do agente
@@ -368,6 +389,41 @@ class Sistema{
 
         // fazer verificação dos dados aqui também
 
+        var placaValida = true
+        for( var i =0; i< placa.length; i++){
+            if( typeof placa[i]!== "string"){
+                placaValida = false
+                console.log("Placa inválida")
+                this.sairDoSisitema()
+            }
+        }
+
+        var modeloValido = true
+        for(var i=0; i<modelo.length;i++){
+            if(typeof modelo[i]!== "string"){
+                modeloValido=false
+                console.log("Modelo inválido")
+                this.sairDoSisitema()
+            }
+        }
+
+        var marcaValida = true
+        for(var i =0;  i<marca.length;i++){
+            if(typeof marca[i]!== "string"){
+                marcaValida=false
+                console.log("marca inválida")
+                this.sairDoSisitema()
+            }
+        }
+
+        var corValida = true
+        for(var i =0 ; i<cor.length;i++){
+            if(typeof cor[i]!== "string"){
+                corValida= false
+                console.log("cor inválida")
+                this.sairDoSisitema()
+            }
+        }
 
     } 
 

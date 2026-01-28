@@ -106,8 +106,8 @@ class Sistema{
 
     cadastroCondutor(){
         console.log("Seção de cadastro - Condutor")
-        var nome_condutor = requisicao.question("Nome:"),
-        cpf_condutor = requisicao.question("CPF:")
+        var nome_condutor = requisicao.question("Nome:")
+        var cpf_condutor = requisicao.question("CPF:")
         var data_de_nascimento_condutor = requisicao.question("Data de nascimento (XX/XX/XXXX):")
         var email_condutor_cadastro = requisicao.question("email:")
         var senha_condutor_cadastro = requisicao.question("senha:")
@@ -115,6 +115,28 @@ class Sistema{
         const condutor = new Condutor(ID_condutor,nome_condutor, cpf_condutor, data_de_nascimento_condutor, email_condutor_cadastro, senha_condutor_cadastro)
         this.condutores.push(condutor)
         Condutor.isCadastrado= true;
+
+        if(typeof nome_condutor!=="string" && nome_condutor.trim().lenght >0){
+            console.log("Nome inválido. O nome deve ser composto por caracteres e não pode ser vazio")
+            return
+        }
+
+        if(cpf_condutor.length!==11){
+            console.log("CPF inválido. O CPF deve conter 11 dígitos")
+            return
+        }
+
+        if(data_de_nascimento_condutor.length!==8){
+            console.log("A data de nascimento deve conter 8 numero [DD//MM//AAAA]")
+            return
+        }
+
+        if(!email_condutor_cadastro.includes("@")){
+            console.log(`Email inválido. Emails devem conter o caracter @`)
+            return
+        }
+
+        // verificar o fato de uns caras ai terem que ser números
 
         // agora, com o cadastro feito, eu tenho que redirecionar o usuário para o login
 
@@ -138,6 +160,29 @@ class Sistema{
         var email_agente_cadastro = requisicao.question("email:")
         var senha_agente_cadastro = requisicao.question("senha:")
         var num_de_matricula = requisicao.question("numero de matricula:")
+
+        if(typeof nome_agente!=="string" && nome_agente.trim().lenght >0){
+            console.log("Nome inválido. O nome deve ser composto por caracteres e não pode ser vazio")
+            return
+        }
+
+        if(cpf_agente.length!==11){
+            console.log("CPF inválido. O CPF deve conter 11 dígitos")
+            return
+        }
+
+        if(data_de_nascimento_agente.length!==8){
+            console.log("A data de nascimento deve conter 8 numero [DD//MM//AAAA]")
+            return
+        }
+
+        if(!email_condutor_cadastro.includes("@")){
+            console.log(`Email inválido. Emails devem conter o caracter @`)
+            return
+        }
+
+        // falta verificar se tudo isso é número ou não (menos o nome)
+
         
 // pronto, aqui peguei os dados do agente
         const ID_agente = this.agentes.length+1;
@@ -320,6 +365,8 @@ class Sistema{
         var marca = requisicao.question("Marca:")
         var cor = requisicao.question("Cor:")
         this.veiculos.push(new Veiculo(placa,modelo,marca,cor))
+
+
     } 
 
 // pagamento de multa (voltar nesse mais pro final)
@@ -516,7 +563,11 @@ class Sistema{
     }
 }
 
-// mudança aqui agora na main?
+/* pra dar o commit no github
+
+    git status (ver se aparece main)
+    
+ */
 
 const sistema = new Sistema();
 sistema.fazerLogin();

@@ -366,6 +366,8 @@ class Sistema{
         var cor = requisicao.question("Cor:")
         this.veiculos.push(new Veiculo(placa,modelo,marca,cor))
 
+        // fazer verificação dos dados aqui também
+
 
     } 
 

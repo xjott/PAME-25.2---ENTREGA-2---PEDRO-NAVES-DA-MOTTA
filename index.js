@@ -123,7 +123,7 @@ class Sistema{
 
        var cpfValido = true;
         for(var i =0;i<cpf_condutor.length;i++){
-            if(typeof (cpf_condutor[i]) !== "string"){
+            if(isNaN(parseInt(i))){
                 cpfValido=false
                 console.log("CPF inválido")
                 this.sairDoSisitema()
@@ -132,7 +132,7 @@ class Sistema{
 
         var dataDeNascimentoValida= true
         for(var i =0; i<data_de_nascimento_condutor.length;i++){
-            if(typeof (data_de_nascimento_condutor[i])!== "string")
+            if(isNaN(parseInt(i)))
                 dataDeNascimentoValida = false
                 console.log("data de nascimento inválida")
                 this.sairDoSisitema()
@@ -175,7 +175,7 @@ class Sistema{
 
         var cpfValido = true;
         for(var i =0;i<cpf_agente.length;i++){
-            if(typeof (cpf_agente[i]) !== "string"){
+            if(isNaN(parseInt(i))){
                 cpfValido=false
                 console.log("CPF inválido")
                 this.sairDoSisitema()
@@ -184,7 +184,7 @@ class Sistema{
 
         var dataDeNascimentoValida= true
         for(var i =0; i<data_de_nascimento_agente.length;i++){
-            if(typeof (data_de_nascimento_agente[i])!== "string")
+            if(isNaN(parseInt(i)))
                 dataDeNascimentoValida = false
                 console.log("data de nascimento inválida")
                 this.sairDoSisitema()
@@ -197,7 +197,7 @@ class Sistema{
 
         var numeroDeMatriculaValido = true
         for(var i =0;i<numeroDeMatriculaValido.lenght;i++ ){
-            if(typeof(num_de_matricula[i]!== "string")){
+            if(isNaN(parseInt(i))){
                 numeroDeMatriculaValido = false
                 console.log('número de matrícula inválido')
                 this.sairDoSisitema()

@@ -1,6 +1,4 @@
 var requisicao = require('readline-sync');
-/*var idade = requisicao.question("idade:")
-console.log(`idade: ${idade}`)*/
 
 // as classes que não são o sistema nao tem métodos, só atributos
 
@@ -115,6 +113,9 @@ class Sistema{
         const condutor = new Condutor(ID_condutor,nome_condutor, cpf_condutor, data_de_nascimento_condutor, email_condutor_cadastro, senha_condutor_cadastro)
         this.condutores.push(condutor)
         Condutor.isCadastrado= true;
+
+
+        // nota que serve para esse e todos os cadastros: o sistema deixa o usuário colocar todos os dados e depois indica o que está errado
 
         if(typeof nome_condutor!=="string" && nome_condutor.lenght===0){
             console.log("Nome inválido. O nome deve ser composto por caracteres e não pode ser vazio")
@@ -394,7 +395,7 @@ class Sistema{
         for( var i =0; i< placa.length; i++){
             if( typeof placa[i]!== "string"){
                 placaValida = false
-                console.log("Placa inválida. Use apenas letras")
+                console.log("Placa inválida.")
                 this.sairDoSisitema()
             }
         }
@@ -403,7 +404,7 @@ class Sistema{
         for(var i=0; i<modelo.length;i++){
             if(typeof modelo[i]!== "string"){
                 modeloValido=false
-                console.log("Modelo inválido. Use apenas letras")
+                console.log("Modelo inválido.")
                 this.sairDoSisitema()
             }
         }
@@ -412,7 +413,7 @@ class Sistema{
         for(var i =0;  i<marca.length;i++){
             if(typeof marca[i]!== "string"){
                 marcaValida=false
-                console.log("marca inválida, Use apenas letras")
+                console.log("marca inválida")
                 this.sairDoSisitema()
             }
         }
@@ -421,11 +422,11 @@ class Sistema{
         for(var i =0 ; i<cor.length;i++){
             if(typeof cor[i]!== "string"){
                 corValida= false
-                console.log("cor inválida, use apenas letras")
+                console.log("cor inválida")
                 this.sairDoSisitema()
             }
         }
-
+        // acabei entendendo errado o que tinha que fazer quando tirei a dúvida, mas aqui no cadastro de carro funciona então acho que vou deixar
     } 
 
 // pagamento de multa (voltar nesse mais pro final)
@@ -622,7 +623,7 @@ class Sistema{
     }
 }
 
-/*  personal note - dar o commit no github
+/*  personal note - dar o commit no github via terminal
     git status (ver se aparece main)
     git add .
     git commit -m "mensagem do commit"
@@ -632,3 +633,5 @@ class Sistema{
 
 const sistema = new Sistema();
 sistema.fazerLogin();
+
+

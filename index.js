@@ -244,7 +244,7 @@ class Sistema{
         this.perfil = "condutor"
         console.log("Você está logado no sistema como CONDUTOR") // e ai preciso colocar tudo o que o condutor pode fazer (e guiar o usuário)
         console.log("Pressione o número relativo à ação que deseja realisar")
-         var opcao= requisicao.question("[1]- Ver Meus Dados \n [2]- Ver minhas multas \n [3] cadastrar veículo \n [4]- Pagar multa \n [5]- Recorrer multa")
+         var opcao= requisicao.question("[1]- Ver Meus Dados \n [2]- Ver minhas multas \n [3] cadastrar veículo \n [4]- Pagar multa \n [5]- Recorrer multa \n [6]-Editar meus dados")
 
 // essas opções vão ser recorrentes ao longo do código, foi meu modo de deixar o uso mais intuitivo
 
@@ -266,6 +266,10 @@ class Sistema{
 
                 else if(opcao==="5"){
                 this.recorrerMulta();
+                }
+
+                else if(opcao==="6"){
+                    this.editarMeusDados();
                 }
 
                 else{
@@ -297,7 +301,7 @@ class Sistema{
                 console.log("Você está logado como AGENTE")
                 // e a partir daqui listar tudo que o agente pode fazer
                 console.log("Digite o número que melhor corresponde à ação que deseja realizar:")
-                console.log("[1]- Ver meus dados \n [2]- Ver lista de veículos \n [3]-Ver lista de condutores\n [4]-Aplicar multa  \n [5]-Ver todas as multas \n [6]-Alterar status da multa")
+                console.log("[1]- Ver meus dados \n [2]- Ver lista de veículos \n [3]-Ver lista de condutores\n [4]-Aplicar multa  \n [5]-Ver todas as multas \n [6]-Alterar status da multa \n [7]-Editar meus dados")
                 var opcao = requisicao.question("Digite aqui:")
                 if(opcao=="1"){
                     // de novo, vou ter que declarar essas funções todas
@@ -321,6 +325,10 @@ class Sistema{
 
                 else if(opcao==="6"){
                     this.alterarStatusDaMulta();
+                }
+
+                else if(opcao==="7"){
+                    this.editarMeusDados()
                 }
 
                 else{
@@ -621,7 +629,77 @@ class Sistema{
             console.log("Opção inválida")
         }
     }
-}
+
+    editarMeusDados(){
+        var usuario = this.usuariologado
+        var perfil = this.perfil
+
+        console.log("EDITAR DADOS")
+        console.log("Digite 1 para confirmar que quer mudar seus dados, se não sairá do sistema e seus dados não serão alterados")
+
+        var opcao = requisicao.question("Digite aqui:")
+
+        if(opcao==="1" && perfil==="condutor"){
+            console.log("Abaixo, digite os seus novos dados ao lado dos antigos")
+            var nome = requisicao.question(`Nome atual ${this.usuariologado.nome_condutor}, novo nome:`)
+            var email = requisicao.question(`Email atual ${this.usuariologado.email_condutor}, novo email: `)
+            var senha = requisicao.question(`Senha atual ${this.usuariologado.senha_condutor}, nova senha:`)
+
+            var data_de_nascimento = requisicao.question(`Data de nascimento atual: ${this.usuariologado.data_de_nascimento_condutor}, Nova data:`)
+
+            var cpf = requisicao.question(`CPF atual: ${this.usuariologado.cpf_condutor}, novo CPF:`)
+
+            this.usuariologado.nome_condutor = nome
+            this.usuariologado.email_condutor = email
+            this.usuariologado.senha_condutor = senha
+            this.usuariologado.data_de_nascimento_condutor = data_de_nascimento
+            this.usuariologado.cpf_condutor = cpf
+
+            // como o ID é um número dado pelo sistema, não há sentido em deixar o usuário trocá-lo (sendo condutor ou agente)
+
+        }
+
+        else if(opcao===1 && perfil==="agente"){
+
+            var usuario = this.usuariologado
+            var perfil = this.perfil
+
+            console.log("Abaixo, digite os seus novos dados ao lado dos antigos")
+            var nome = requisicao.question(`Nome atual ${this.usuariologado.nome_agente}, novo nome:`)
+            var email = requisicao.question(`Email atual ${this.usuariologado.email_agente}, novo email: `)
+            var senha = requisicao.question(`Senha atual ${this.usuariologado.senha_agente}, nova senha:`)
+
+            var data_de_nascimento = requisicao.question(`Data de nascimento atual: ${this.usuariologado.data_de_nascimento_agente}, Nova data:`)
+
+            var cpf = requisicao.question(`CPF atual: ${this.usuariologado.cpf_agente}, novo CPF:`)
+
+            var numerodematricula = requisicao.question(`Número de matricula: ${this.usuariologado.num_de_matricula}, novo número de matrícula:`)
+
+            this.usuariologado.nome_agente = nome
+            this.usuariologado.email_agente = email
+            this.usuariologado.senha_agente = senha
+            this.usuariologado.data_de_nascimento_agente = data_de_nascimento
+            this.usuariologado.cpf_agente = cpf
+        }
+
+        else{
+            console.log("Saindo do sistema")
+            this.sairDoSisitema();
+        }
+        // fim da primeira funcionalidade opcional, indo pra segunda ->excluir veículo
+        }
+    
+    excluirVeiculo(){
+        
+    }
+
+
+        }
+
+
+        
+    
+
 
 /*  personal note - dar o commit no github via terminal
     git status (ver se aparece main)
@@ -631,7 +709,12 @@ class Sistema{
     git status(de novo só pra ver se a branch tá up to date com 'origin/main')
  */
 
+// tentar fazer o editar dados e o excluir veículo dos opcionais
+
 const sistema = new Sistema();
 sistema.fazerLogin();
+
+
+
 
 

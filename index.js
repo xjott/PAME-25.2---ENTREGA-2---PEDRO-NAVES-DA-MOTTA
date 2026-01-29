@@ -244,7 +244,7 @@ class Sistema{
         this.perfil = "condutor"
         console.log("Você está logado no sistema como CONDUTOR") // e ai preciso colocar tudo o que o condutor pode fazer (e guiar o usuário)
         console.log("Pressione o número relativo à ação que deseja realisar")
-         var opcao= requisicao.question("[1]- Ver Meus Dados \n [2]- Ver minhas multas \n [3] cadastrar veículo \n [4]- Pagar multa \n [5]- Recorrer multa \n [6]-Editar meus dados")
+         var opcao= requisicao.question("[1]- Ver Meus Dados \n [2]- Ver minhas multas \n [3] cadastrar veículo \n [4]- Pagar multa \n [5]- Recorrer multa \n [6]-Editar meus dados \n [7]-buscar seu veículo pela placa")
 
 // essas opções vão ser recorrentes ao longo do código, foi meu modo de deixar o uso mais intuitivo
 
@@ -270,6 +270,10 @@ class Sistema{
 
                 else if(opcao==="6"){
                     this.editarMeusDados();
+                }
+
+                else if(opcao==="7"){
+                    this.buscaPelaPlaca(); // só consegui aplicar buscar pela placa ( funcionalidade opcional) como uma função do condutor
                 }
 
                 else{
@@ -630,6 +634,8 @@ class Sistema{
         }
     }
 
+    // área das funcionalidades opcionais - vou fazer edição de dados e busca por placa
+
     editarMeusDados(){
         var usuario = this.usuariologado
         var perfil = this.perfil
@@ -686,20 +692,25 @@ class Sistema{
             console.log("Saindo do sistema")
             this.sairDoSisitema();
         }
-        // fim da primeira funcionalidade opcional, indo pra segunda ->excluir veículo
+        // fim da primeira funcionalidade opcional, indo pra segunda -> busca por placa
         }
-    
-    excluirVeiculo(){
+
+    buscaPelaPlaca(){
         
+        var condutor = this.usuariologado
+        var placa = requisicao.question("Digite a placa do seu carro, exatamente como está cadastrada:")
+
+        for(var i = 0; i< condutor.veiculos.lenght; i++){
+            if(condutor.veiculos[i].placa===placa){
+                console.log("Veículo encontrado")
+                console.log(condutor.veiculos[i])
+            }
+        }
     }
 
+    // fim da classe Sistema
 
         }
-
-
-        
-    
-
 
 /*  personal note - dar o commit no github via terminal
     git status (ver se aparece main)
@@ -709,7 +720,7 @@ class Sistema{
     git status(de novo só pra ver se a branch tá up to date com 'origin/main')
  */
 
-// tentar fazer o editar dados e o excluir veículo dos opcionais
+// execução
 
 const sistema = new Sistema();
 sistema.fazerLogin();
